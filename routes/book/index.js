@@ -18,25 +18,26 @@ router.post("/", async (req, res) => {
     try {
         const { title, description } = req.body;
 
-        const id = getID(req.headers["authorization"]);
+        const id = await getID(req.headers["authorization"]);
 
-        const newBook = new Book({ title, description, user: id });
+        const newBook = new Book({ title, description, userid: id });
 
         await newBook.save();
 
         res.send("book is created");
     } catch (e) {
-        res.send(e);
+        res.send(e.message);
     }
 });
 
 router.get("/:id", async (req, res) => {
     const { id } = req.params;
 
-    const book = await Book.findOne({ user: id });
+    const userId = await getID(req.headers["authorization"]);
 
-    book._id = 0;
-    book.user = 0;
+    const book = await Book.findOne({ _id: id, userId });
+
+    book.userid = 0;
 
     res.json(book);
 });
@@ -55,7 +56,7 @@ router.delete("/:email/:id", async (req, res) => {
         console.log(id);
         res.send("book is deleated");
     } catch (e) {
-        res.send(e);
+        res.send(e.message);
     }
 });
 

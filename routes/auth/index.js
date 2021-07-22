@@ -16,6 +16,7 @@ router.post("/signup", async (req, res) => {
         );
 
         await newUser.save();
+
         res.send(signedJWT);
     } catch (e) {
         res.send(e.message);

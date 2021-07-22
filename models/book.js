@@ -11,7 +11,7 @@ const Book = new Schema({
         trim: true,
         required: true,
     },
-    user: {
+    userid: {
         type: String,
         required: true,
     },

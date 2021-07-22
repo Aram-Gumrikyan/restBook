@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 
 const { auth, book } = require("./routes");
 
-// for post request
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
