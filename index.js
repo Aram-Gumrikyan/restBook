@@ -12,20 +12,20 @@ app.use("/api/auth", auth);
 app.use("/api/book", book);
 
 async function start() {
-    try {
-        await mongoose.connect(process.env.DB, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useCreateIndex: true,
-            useFindAndModify: false,
-        });
+	try {
+		await mongoose.connect(process.env.DB, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+			useCreateIndex: true,
+			useFindAndModify: false,
+		});
 
-        app.listen(process.env.PORT || 8000, () => {
-            console.log("server run on port 8000");
-        });
-    } catch (e) {
-        console.log(e);
-    }
+		app.listen(process.env.PORT || 8000, () => {
+			console.log("server run on port 8000");
+		});
+	} catch (e) {
+		console.log(e);
+	}
 }
 
 start();
